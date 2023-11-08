@@ -142,6 +142,12 @@ function animate() {
 
   // Animation Logic Here
   //cube.rotation.x += 0.01;
+    // Update Planets
+
+  for (let i = 1; i < planets.length; i++) {
+    const planet = planets[i];
+    planet.update();
+  }
 
   // Camera Logic and Controls here
   if (guiControls.orbitalCamera) {
@@ -169,11 +175,6 @@ function animate() {
   let secs = (t1 - t0) / 1000;
   camControls.flyControl.update(1 * secs);
 
-  // Update Planets
 
-  for (let i = 1; i < planets.length; i++) {
-    const planet = planets[i];
-    planet.update();
-  }
   renderer.render(scene, camera);
 }
