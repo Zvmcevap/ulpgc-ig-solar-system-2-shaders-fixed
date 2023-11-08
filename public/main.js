@@ -152,7 +152,7 @@ function animate() {
       newCenter = new THREE.Vector3(
         oBody.mesh.position.x,
         oBody.mesh.position.y,
-        0
+        oBody.mesh.position.z
       );
     }
 
