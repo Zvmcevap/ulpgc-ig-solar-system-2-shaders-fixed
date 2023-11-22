@@ -1,6 +1,4 @@
-## ULPGC Solar System II
+## ULPGC Solar System II with Shaders
 
-- 10 Celestial bodies orbiting in an unrealistic way, but textured realistically
-- Spotlight from the Sun to the planets
-- Orbit controls for each of the bodies
-- Flight controls with controls for speed
+- 10 Celestial bodies orbiting in an unrealistic way, each with a different fragment shader
+- Last one has a textured fragment shader

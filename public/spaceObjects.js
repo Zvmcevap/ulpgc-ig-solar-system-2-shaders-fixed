@@ -1,5 +1,18 @@
 export class Planet {
-  constructor(three, scene, radius, texture, oBody, oDist, oVelocity, f1, f2) {
+  constructor(
+    three,
+    scene,
+    radius,
+    texture,
+    oBody,
+    oDist,
+    oVelocity,
+    f1,
+    f2,
+    vert,
+    frag,
+    uniforms
+  ) {
     //Size
     this.radius = radius;
 
@@ -19,6 +32,11 @@ export class Planet {
     this.f1 = f1;
     this.f2 = f2;
 
+    // Shaders
+    this.vert = vert;
+    this.frag = frag;
+    this.uniforms = uniforms;
+
     this.createPlanet(three);
     this.createOrbitPath(three);
   }
@@ -30,7 +48,11 @@ export class Planet {
 
     // Geometry
     const geometry = new THREE.SphereGeometry(this.radius, 10, 10);
-    const material = new THREE.MeshPhongMaterial({ map: texture });
+    const material = new THREE.ShaderMaterial({
+      uniforms: this.uniforms,
+      vertexShader: this.vert,
+      fragmentShader: this.frag,
+    });
     this.mesh = new THREE.Mesh(geometry, material);
 
     // Add the planet to the scene
@@ -88,4 +110,24 @@ export function getSun(three) {
   sun.castShadow = false;
 
   return sun;
+}
+
+export function getShaderOrb(three, vertShader, fragShader, uniforms) {
+  // Shaders
+
+  // Create a loader for the texture
+  const textureLoader = new three.TextureLoader();
+
+  // Load the texture from the provided image path
+  const texture = textureLoader.load("./textures/sun.jpg");
+  // Create objects and add them to the scene
+  const geometry = new three.SphereGeometry(1);
+  const material = new three.ShaderMaterial({
+    uniforms: uniforms,
+    vertexShader: vertShader,
+    fragmentShader: fragShader,
+  });
+  const shaderOrb = new three.Mesh(geometry, material);
+
+  return shaderOrb;
 }
